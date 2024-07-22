@@ -211,7 +211,7 @@ print("--------------------------|--------|----------")
 # 6. Loop through the items in the customer's order
 for items in order_list:
     
-    # items_name = {items["Item_names"],  items["Price"], items["Quantity"] }          
+            
     items_name = items["Item_names"]
     price = items["Price"]
     quantity = items["Quantity"]      
@@ -220,9 +220,15 @@ for items in order_list:
     # space = " "
     space = 26 - len(key)
     item_space = " " * space
+
+    ### print(tabulate(table, headers=["Planet","R (km)", "mass (x 10^29 kg)"]))
+    
+    ### print(tabulate(table, headers=[item_names{items_name} {price} {quantity}]))
+
     print(f"{items_name} {item_space} {price} {item_space} {quantity}")
 
     # print(items["Item_names"],  items["Price"], items["Quantity"])
+
     # 7. Store the dictionary items as variables
 
 
