@@ -53,17 +53,8 @@ menu = {
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
 
-order_list = [{
-                "Item_names":"string", 
-                "Price": float, 
-                "Quantity": int 
-              },
-              { 
-                "Item_names": "string", 
-                "Price": float,
-                "Quantity": int
-              },
-             ]
+order_list = []
+          
 
 # Launch the store and present a greeting to the customer
 print("Welcome to the variety food truck.")
@@ -155,12 +146,15 @@ while place_order:
                         quantity == 1
 
                     # Add the item name, price, and quantity to the order list
-                    Item_names = []
-                    Price = []
-                    Quantity = []
 
-                    order_list.append(Item_names , float(Price) , int(Quantity))
-
+                    # order_list.append 
+                    # {Item_name , float(Price) , (Quantity)}
+                    order_list.append({
+                                "Item_names":item_names_selection["Item name"],
+                                "Price":item_names_selection["Price"],
+                                "Quantity": quantity 
+                            }
+                        )
                    
                     # Tell the customer that their input isn't valid
                 
@@ -177,14 +171,17 @@ while place_order:
     while True:
         # Ask the customer if they would like to order anything else
         keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ")
-
+        keep_ordering = keep_ordering.lower()
         # 5. Check the customer's input
-        if keep_ordering.lower() !="y" or "n":  
+        if keep_ordering =="y" or keep_ordering =="n":  
                   
            match keep_ordering:
                 case "y":
-                    continue
+                    place_order = True
+                    break
                 case "n":
+                    place_order = False
+                    print("Thank you for your order!")
                     break
                 # Keep ordering
 
@@ -199,7 +196,8 @@ while place_order:
 
 
                 # Tell the customer to try again
-    
+        else:
+            print("Try again !")
 
 # Print out the customer's order
 print("This is what we are preparing for you.\n")
@@ -211,7 +209,20 @@ print("Item name                 | Price  | Quantity")
 print("--------------------------|--------|----------")
 
 # 6. Loop through the items in the customer's order
+for items in order_list:
+    
+    # items_name = {items["Item_names"],  items["Price"], items["Quantity"] }          
+    items_name = items["Item_names"]
+    price = items["Price"]
+    quantity = items["Quantity"]      
 
+    # print(items_name)
+    # space = " "
+    space = 26 - len(key)
+    item_space = " " * space
+    print(f"{items_name} {item_space} {price} {item_space} {quantity}")
+
+    # print(items["Item_names"],  items["Price"], items["Quantity"])
     # 7. Store the dictionary items as variables
 
 
@@ -219,6 +230,7 @@ print("--------------------------|--------|----------")
 
 
     # 9. Create space strings
+    
 
 
     # 10. Print the item name, price, and quantity
@@ -227,3 +239,12 @@ print("--------------------------|--------|----------")
 # 11. Calculate the cost of the order using list comprehension
 # Multiply the price by quantity for each item in the order list, then sum()
 # and print the prices.
+print("--------------------------|--------|----------")
+
+Total_Order = sum([order["Price"] * int(order["Quantity"]) for order in order_list]) 
+
+print("Your total payment is     :", Total_Order , "$")
+
+# l = [1,2,3,4,5,5]
+
+# sum_ = sum(i *20 for i in l)
