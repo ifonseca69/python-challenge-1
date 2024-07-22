@@ -52,16 +52,14 @@ menu = {
 
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
-item_names = []
-Price = []
-Quantity = []
+
 order_list = [{
-                "item_names":"string", 
+                "Item_names":"string", 
                 "Price": float, 
                 "Quantity": int 
               },
               { 
-                "item_names": "string", 
+                "Item_names": "string", 
                 "Price": float,
                 "Quantity": int
               },
@@ -132,37 +130,43 @@ while place_order:
                     i += 1
             print("-------|--------------------------|-------")        
             # 2. Ask customer to input menu item number
-            menu_selection_number = input("Please enter a selection from Item # menu ")
-
+            menu_selection = input("Please enter a selection from the menu Item # ")
+            
             # 3. Check if the customer typed a number
-            if menu_selection_number.isdigit():
-                              
+            if menu_selection.isdigit():
+               
+                
                 # Convert the menu selection to an integer
-                int(menu_selection_number)
+                int(menu_selection)
             
            
                 # 4. Check if the menu selection is in the menu items
-                if int(menu_selection_number) in menu_items.keys():
+                if int(menu_selection) in menu_items.keys():
                     # Store the item name as a variable
-                    item_names_selection = menu_items[int(menu_selection_number)]
+                    item_names_selection = menu_items[int(menu_selection)]
 
                     # Ask the customer for the quantity of the menu item
-                    Quanity = input("How many items would you like to order ?")
+                    quantity = input("How many items would you like to order ?")
 
                     # Check if the quantity is a number, default to 1 if not
-                    if Quanity.isdigit():   
-                        continue
+                    if quantity.isdigit():   
+                        int(quantity)
                     else:
-                        Quanity == 1
+                        quantity == 1
 
                     # Add the item name, price, and quantity to the order list
+                    Item_names = []
+                    Price = []
+                    Quantity = []
+
+                    order_list.append(Item_names , float(Price) , int(Quantity))
+
                    
-
                     # Tell the customer that their input isn't valid
-
-
+                
+            else:
                 # Tell the customer they didn't select a menu option
-                print("Sorry! you din't select a menu option")
+                print(f"{menu_selection} you din't select a menu option")
         else:
             # Tell the customer they didn't select a menu option
             print(f"{menu_category} was not a menu option.")
@@ -175,13 +179,13 @@ while place_order:
         keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ")
 
         # 5. Check the customer's input
-        if keep_ordering == ("Y"):
-            continue               
-
-            
-        else:
-            if keep_ordering == ("N"):
-                break
+        if keep_ordering.lower() !="y" or "n":  
+                  
+           match keep_ordering:
+                case "y":
+                    continue
+                case "n":
+                    break
                 # Keep ordering
 
                 # Exit the keep ordering question loop
